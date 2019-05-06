@@ -23,9 +23,9 @@ public class Translations {
         }
     }
 
-    public String get(final String code, String param1, String param2) {
+    public String get(final String code, String param1) {
         try {
-            return accessor.getMessage(code, new Object[]{param1, param2});
+            return accessor.getMessage(code, new Object[]{param1});
         } catch (NoSuchMessageException e) {
             return code;
         }

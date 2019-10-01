@@ -37,13 +37,13 @@ public class FeatureToggleController implements FeatureToggleService {
     }
 
     @PostMapping("/" + TableNameContants.ENABLE + "/{" + TableNameContants.KEY + "}")
-    public void enable(@PathVariable String key) {
-        this.featureToggleService.enable(key);
+    public FeatureToggle enable(@PathVariable String key) {
+        return this.featureToggleService.enable(key);
     }
 
     @PostMapping("/" + TableNameContants.DISABLE + "/{" + TableNameContants.KEY + "}")
-    public void disable(@PathVariable  String key) {
-        this.featureToggleService.disable(key);
+    public FeatureToggle disable(@PathVariable  String key) {
+        return this.featureToggleService.disable(key);
     }
 
     @PutMapping

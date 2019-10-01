@@ -8,7 +8,9 @@ import net.galewski.master.feature.microserwis.service.FeatureToggleService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 @Service
 public class FeatureToggleServiceImpl extends AbstractService implements FeatureToggleService {
@@ -18,6 +20,10 @@ public class FeatureToggleServiceImpl extends AbstractService implements Feature
 
     @Override
     public FeatureToggle create(FeatureToggleDto dto) {
+        if (dto.getKey() == null)
+        {
+            throw new IllegalArgumentException(this.i18n.get("feature.key.null", dto.getKey()));
+        }
         FeatureToggle parent  = this.featureToggleRepository.findByKey(dto.getParentKey()).orElse(null);
         if (this.featureToggleRepository.findByKey(dto.getKey()).isPresent())
         {
@@ -74,16 +80,16 @@ public class FeatureToggleServiceImpl extends AbstractService implements Feature
     }
 
     @Override
-    public void enable(String key) {
+    public FeatureToggle enable(String key) {
         FeatureToggle toggle = this.findByKey(key);
         toggle.setIsEnabled(true);
-        this.featureToggleRepository.save(toggle);
+        return this.featureToggleRepository.save(toggle);
     }
 
     @Override
-    public void disable(String key) {
+    public FeatureToggle disable(String key) {
         FeatureToggle toggle = this.findByKey(key);
         toggle.setIsEnabled(false);
-        this.featureToggleRepository.save(toggle);
+        return this.featureToggleRepository.save(toggle);
     }
 }

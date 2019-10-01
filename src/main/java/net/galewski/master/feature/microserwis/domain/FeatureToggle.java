@@ -30,10 +30,10 @@ public class FeatureToggle implements Serializable {
     @ManyToOne
     @JoinColumn(name = TableNameContants.PARENT_KEY)
     @JsonIgnoreProperties({TableNameContants.PARENT})
-    public FeatureToggle parent;
+    private FeatureToggle parent;
 
     @OneToMany(mappedBy= TableNameContants.PARENT)
     @JsonIgnore
-    public Set<FeatureToggle> subToggles = new HashSet<>();
+    private Set<FeatureToggle> subToggles = new HashSet<>();
 
 }

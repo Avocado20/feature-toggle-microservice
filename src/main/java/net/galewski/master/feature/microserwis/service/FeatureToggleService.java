@@ -14,6 +14,6 @@ public interface FeatureToggleService {
     void deleteByKey(String key) throws NoSuchElementException;
 
     Boolean isFeatureEnabled(String key);
-    void enable(String key);
-    void disable(String key);
+    FeatureToggle enable(String key);
+    FeatureToggle disable(String key);
 }
